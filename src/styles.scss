@@ -1,1 +1,34 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+$viewport-x-small: (max-width: 480px);
+$viewport-small: (max-width: 767px);
+$viewport-medium-min: 768px;
+$viewport-medium-max: 1024px;
+$viewport-medium-up: 768px; //min-width
+$viewport-large: (min-width: 1024px);
+$viewport-x-large: (min-width: 1200px);
+$viewport-wide-screen: (min-width: 2000px);
+
+@mixin main-container {
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+    @media (max-width: 767px) {
+      max-width: 616px;
+    }
+    @media (min-width: 768px) and (max-width: 1023px) {
+      padding-left: 40px;
+      padding-right: 40px;
+      max-width: 960px;
+    }
+    @media (min-width: 1024px) {
+      padding-left: 44px;
+      padding-right: 44px;
+      max-width: 1312px;
+    }
+  }
