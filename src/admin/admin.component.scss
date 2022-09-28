@@ -1,0 +1,42 @@
+@import "../styles.scss";
+
+.admin-container {
+  @include main-container;
+}
+
+.accordion-container {
+  display: grid;
+  gap: 20px;
+}
+
+.get {
+  color: green;
+}
+.post {
+  color: darkgoldenrod;
+}
+.delete {
+  color: crimson;
+}
+
+.vertical-form {
+  display: flex;
+  justify-content: space-between;
+  //   mat-form-field {
+  //     max-width: 300px;
+  //   }
+}
+
+.mat-form-field-container {
+  display: flex;
+  flex-direction: column;
+  width: 48%;
+}
+
+.result-container {
+  width: 48%;
+}
+
+.submit-button {
+  max-width: 100px;
+}

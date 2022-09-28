@@ -1,0 +1,14 @@
+@import '../../../styles.scss';
+
+.navbar-container {
+    @include main-container;
+}
+.shopping-icon-container {
+    padding-right: 25px;
+    cursor: pointer;
+    
+}
+
+.mat-icon {
+    font-size: 26px;
+}

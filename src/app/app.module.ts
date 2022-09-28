@@ -1,33 +1,55 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HomePageComponent } from 'src/homepage/homepage.component';
-import { AboutComponent } from 'src/about/about.component';
-import { NavbarComponent } from 'src/homepage/navbar/navbar.component';
+import { HomePageComponent } from 'src/components/homepage/homepage.component';
+import { AboutComponent } from 'src/components/about/about.component';
+import { NavbarComponent } from 'src/components/homepage/navbar/navbar.component';
+import { AdminComponent } from 'src/admin/admin.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatBadgeModule } from '@angular/material/badge';
+import { HeroComponent } from 'src/components/hero/hero.component';
+import { ProductGalleryComponent } from 'src/components/product-gallery/product-gallery.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
     AboutComponent,
-    NavbarComponent
+    NavbarComponent,
+    HeroComponent,
+    ProductGalleryComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatBadgeModule,
+    HttpClientModule,
+    MatExpansionModule,
+    CdkAccordionModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

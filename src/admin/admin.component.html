@@ -1,0 +1,118 @@
+<div class="admin-container">
+  <h2>Welcome to the admin page</h2>
+  <p>Here you can add new products, delete products, and ...</p>
+
+  <div class="accordion-container">
+    <mat-accordion>
+      <mat-expansion-panel hideToggle (opened)="getAllProducts()">
+        <mat-expansion-panel-header>
+          <mat-panel-title class="get">
+            VIEW all products from database
+          </mat-panel-title>
+          <mat-panel-description>
+            Expand this panel to get all products
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <code>
+          <pre>{{ allProducts | json }}</pre>
+        </code>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-accordion>
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title class="post">
+            ADD a new product to the database
+          </mat-panel-title>
+          <mat-panel-description>
+            Expand this panel to fill out the form
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <form
+          class="vertical-form"
+          [formGroup]="postProductForm"
+          (ngSubmit)="postNewProduct()"
+        >
+          <div class="mat-form-field-container">
+            <mat-form-field appearance="outline">
+              <mat-label>Title</mat-label>
+              <input matInput formControlName="title" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Description</mat-label>
+              <input matInput formControlName="description" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Image</mat-label>
+              <input matInput formControlName="image" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-select formControlName="type">
+                <mat-option value="digital">Digital</mat-option>
+                <mat-option value="physical">Physical</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <button
+              type="submit"
+              class="button is-primary submit-button"
+              [ngClass]="{ 'is-loading': postButtonLoading === true }"
+            >
+              Submit
+            </button>
+          </div>
+
+          <div class="result-container">
+            <p>Result:</p>
+            <code>
+              <pre>{{ postProduct | json }}</pre>
+            </code>
+          </div>
+        </form>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-accordion>
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title class="delete">
+            DELETE a product from the database
+          </mat-panel-title>
+          <mat-panel-description>
+            Expand this panel to fill out the form
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>
+          Enter the id of the product to delete it (You can find the product id
+          in the VIEW accordion above)
+        </p>
+        <form
+          class="vertical-form"
+          [formGroup]="deleteProductForm"
+          (ngSubmit)="postNewProduct()"
+        >
+          <div class="mat-form-field-container">
+            <mat-form-field appearance="outline">
+              <mat-label>ID</mat-label>
+              <input matInput formControlName="id" />
+            </mat-form-field>
+            <button
+              type="submit"
+              class="button is-danger submit-button"
+              [ngClass]="{ 'is-loading': postButtonLoading === true }"
+            >
+              Submit
+            </button>
+          </div>
+
+          <div class="result-container">
+            <p>Result:</p>
+            <code>
+              <pre>{{ postProduct | json }}</pre>
+            </code>
+          </div>
+        </form>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>

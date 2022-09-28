@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AboutComponent } from 'src/about/about.component';
-import { HomePageComponent } from 'src/homepage/homepage.component';
+import { AdminComponent } from 'src/admin/admin.component';
+import { AboutComponent } from 'src/components/about/about.component';
+import { HomePageComponent } from 'src/components/homepage/homepage.component';
+import { ProductGalleryComponent } from 'src/components/product-gallery/product-gallery.component';
 
 const routes: Routes = [
   {
@@ -9,14 +11,22 @@ const routes: Routes = [
     component: AboutComponent,
   },
   {
+    path: 'products',
+    component: ProductGalleryComponent,
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
+  },
+  {
     path: '',
     component: HomePageComponent,
-    pathMatch: 'full'
-  }
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
