@@ -29,9 +29,26 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.delete("/", async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
-    const deletedProduct = await Product.findByIdAndDelete(req.body);
+    const updatedProduct = await Product.findByIdAndUpdate(
+      req.params.id,
+      { $set: req.body },
+      { new: true }
+    );
+    res.status(200).json(updatedProduct);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message:
+        "There was an issue trying to update the product. Please try again.",
+    });
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  try {
+    const deletedProduct = await Product.findByIdAndDelete(req.params.id);
     res.status(200).json(deletedProduct);
   } catch (error) {
     console.log(error);

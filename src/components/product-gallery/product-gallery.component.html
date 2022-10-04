@@ -1,6 +1,36 @@
 <div class="product-gallery-container">
-    <div *ngFor="let product of products">
-        <p>{{ product.title }}</p>
-        <p>{{ product.description }}</p>
+  <div class="staggered-products-container">
+    <div class="staggered-product">
+      <img
+        [src]="
+          !products
+            ? 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?20151024034921'
+            : products[0].image
+        "
+        class="product-image"
+      />
+      <div class="text">
+        <h1>The Original Framed Masterpiece</h1>
+        <p>
+          A completely custom and framed print of your hole in one. Don't worry,
+          it doesn't have to be a hole in one. Save your memories of your epic
+          day
+        </p>
+      </div>
     </div>
+    <div class="staggered-product">
+      <img
+        [src]="
+          !products
+            ? 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?20151024034921'
+            : products[1].image
+        "
+        class="product-image order-change"
+      />
+      <div class="text">
+        <h1>Header for the second product</h1>
+        <p>This is a sample description</p>
+      </div>
+    </div>
+  </div>
 </div>

@@ -17,9 +17,14 @@ export class ProductService {
     );
   }
 
+  updateProduct(id: string, product: Product) {
+    return this.http.put<Product>(
+      `http://localhost:4000/api/product/${id}`,
+      product
+    );
+  }
+
   deleteProduct(id: string) {
-    return this.http.delete<Product>('http://localhost:4000/api/product', {
-      body: id,
-    });
+    return this.http.delete<Product>(`http://localhost:4000/api/product/${id}`);
   }
 }

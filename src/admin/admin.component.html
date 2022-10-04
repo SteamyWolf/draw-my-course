@@ -55,6 +55,7 @@
             </mat-form-field>
             <button
               type="submit"
+              [disabled]="postProductForm.invalid"
               class="button is-primary submit-button"
               [ngClass]="{ 'is-loading': postButtonLoading === true }"
             >
@@ -75,31 +76,46 @@
     <mat-accordion>
       <mat-expansion-panel hideToggle>
         <mat-expansion-panel-header>
-          <mat-panel-title class="delete">
-            DELETE a product from the database
+          <mat-panel-title class="update">
+            UPDATE a product from the database
           </mat-panel-title>
           <mat-panel-description>
             Expand this panel to fill out the form
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <p>
-          Enter the id of the product to delete it (You can find the product id
-          in the VIEW accordion above)
-        </p>
         <form
           class="vertical-form"
-          [formGroup]="deleteProductForm"
-          (ngSubmit)="postNewProduct()"
+          [formGroup]="updateProductForm"
+          (ngSubmit)="updateProduct()"
         >
           <div class="mat-form-field-container">
             <mat-form-field appearance="outline">
               <mat-label>ID</mat-label>
-              <input matInput formControlName="id" />
+              <input matInput formControlName="id_update" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Title</mat-label>
+              <input matInput formControlName="title_update" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Description</mat-label>
+              <input matInput formControlName="description_update" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Image</mat-label>
+              <input matInput formControlName="image_update" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-select formControlName="type_update">
+                <mat-option value="digital">Digital</mat-option>
+                <mat-option value="physical">Physical</mat-option>
+              </mat-select>
             </mat-form-field>
             <button
               type="submit"
-              class="button is-danger submit-button"
-              [ngClass]="{ 'is-loading': postButtonLoading === true }"
+              [disabled]="updateProductForm.invalid"
+              class="button is-primary submit-button"
+              [ngClass]="{ 'is-loading': updateButtonLoading === true }"
             >
               Submit
             </button>
@@ -108,7 +124,51 @@
           <div class="result-container">
             <p>Result:</p>
             <code>
-              <pre>{{ postProduct | json }}</pre>
+              <pre>{{ updatedProduct | json }}</pre>
+            </code>
+          </div>
+        </form>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-accordion>
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title class="delete-class">
+            DELETE a product from the database
+          </mat-panel-title>
+          <mat-panel-description>
+            Expand this panel to fill out the form
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>
+          Enter the id of the product to delete it. (You can find the product id
+          in the VIEW accordion above)
+        </p>
+        <form
+          class="vertical-form"
+          [formGroup]="deleteProductForm"
+          (ngSubmit)="deleteProductFromDatabase()"
+        >
+          <div class="mat-form-field-container">
+            <mat-form-field appearance="outline">
+              <mat-label>ID</mat-label>
+              <input matInput formControlName="id" />
+            </mat-form-field>
+            <button
+              type="submit"
+              [disabled]="deleteProductForm.invalid"
+              class="button is-danger submit-button"
+              [ngClass]="{ 'is-loading': deleteButtonLoading === true }"
+            >
+              Submit
+            </button>
+          </div>
+
+          <div class="result-container">
+            <p>Result:</p>
+            <code>
+              <pre>{{ deletedProduct | json }}</pre>
             </code>
           </div>
         </form>

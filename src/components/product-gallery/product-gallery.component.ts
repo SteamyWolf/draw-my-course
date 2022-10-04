@@ -13,7 +13,6 @@ export class ProductGalleryComponent implements OnInit {
 
   ngOnInit(): void {
     this.productService.getAllProducts().subscribe((products: Product[]) => {
-      console.log(products);
       this.products = products;
     });
   }

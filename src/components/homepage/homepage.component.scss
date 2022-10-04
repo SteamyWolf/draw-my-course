@@ -1,5 +1,41 @@
-@import '../../styles.scss';
+@import "../../styles.scss";
 
-.homepage-container {
-    @include main-container;
+.reason-to-buy-container {
+  @include main-container;
+  height: 300px;
+}
+
+.two-products-container {
+  //   @include main-container;
+  background: rgb(50, 150, 61);
+  background: radial-gradient(
+    circle,
+    rgba(50, 150, 61, 1) 0%,
+    rgba(0, 0, 0, 1) 100%
+  );
+}
+
+.header-container {
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 40px;
+  color: white;
+}
+
+.header {
+  @include header;
+}
+
+.product-section {
+  @media (min-width: $viewport-medium-up) {
+    display: flex;
+    justify-content: space-evenly;
+  }
+}
+
+.card {
+  margin-bottom: 30px;
+  @media (min-width: $viewport-medium-up) {
+    margin: 0px 30px;
+  }
 }

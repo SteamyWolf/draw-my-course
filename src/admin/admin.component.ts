@@ -13,12 +13,17 @@ import { environment } from 'src/environments/environment';
 export class AdminComponent implements OnInit {
   allProducts!: Product[];
   postProduct!: Product;
-  deletedProduct!: Product;
 
   postProductForm!: FormGroup;
   postButtonLoading: boolean = false;
 
+  updateProductForm!: FormGroup;
+  updatedProduct!: Product;
+  updateButtonLoading: boolean = false;
+
   deleteProductForm!: FormGroup;
+  deletedProduct!: Product;
+  deleteButtonLoading: boolean = false;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -35,6 +40,14 @@ export class AdminComponent implements OnInit {
       description: new FormControl(''),
       image: new FormControl(''),
       type: new FormControl('', [Validators.required]),
+    });
+
+    this.updateProductForm = new FormGroup({
+      id_update: new FormControl('', [Validators.required]),
+      title_update: new FormControl('', [Validators.required]),
+      description_update: new FormControl(''),
+      image_update: new FormControl(''),
+      type_update: new FormControl('', [Validators.required]),
     });
 
     this.deleteProductForm = new FormGroup({
@@ -74,11 +87,41 @@ export class AdminComponent implements OnInit {
       );
   }
 
+  updateProduct() {
+    this.updateButtonLoading = true;
+    this.productService
+      .updateProduct(this.updateProductForm.controls['id_update'].value, {
+        title: this.updateProductForm.controls['title_update'].value,
+        description:
+          this.updateProductForm.controls['description_update'].value,
+        image: this.updateProductForm.controls['image_update'].value,
+        type: this.updateProductForm.controls['type_update'].value,
+      })
+      .subscribe(
+        (updatedProduct) => {
+          this.updatedProduct = updatedProduct;
+          this.updateButtonLoading = false;
+        },
+        (err) => {
+          console.error(err);
+          this.updateButtonLoading = false;
+        }
+      );
+  }
+
   deleteProductFromDatabase() {
+    this.deleteButtonLoading = true;
     this.productService
       .deleteProduct(this.deleteProductForm.controls['id'].value)
-      .subscribe((deletedProduct: Product) => {
-        this.deletedProduct = deletedProduct;
-      });
+      .subscribe(
+        (deletedProduct: Product) => {
+          this.deletedProduct = deletedProduct;
+          this.deleteButtonLoading = false;
+        },
+        (err) => {
+          console.error(err);
+          this.deleteButtonLoading = false;
+        }
+      );
   }
 }

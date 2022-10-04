@@ -3,3 +3,36 @@
 .product-gallery-container {
   @include main-container;
 }
+
+.staggered-products-container {
+  display: grid;
+  gap: 30px;
+}
+
+.staggered-product {
+  height: 100%;
+  @media (min-width: $viewport-medium-up) {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 20px;
+    height: 400px;
+    align-items: center;
+  }
+}
+
+.product-image {
+  height: 400px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.order-change {
+  @media (min-width: $viewport-medium-up) {
+    order: 2;
+  }
+}
+
+.text {
+  padding: 40px;
+  text-align: center;
+}
