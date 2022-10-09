@@ -1,0 +1,26 @@
+@import "../../styles.scss";
+
+.navbar-main-container {
+  @include main-container;
+  background-color: $white;
+}
+
+.navbar-main-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 55px;
+}
+
+.navbar-logo-container {
+  cursor: pointer;
+}
+
+.shopping-icon-container {
+  padding-right: 36px;
+  cursor: pointer;
+}
+
+.mat-icon {
+  font-size: 26px;
+}
