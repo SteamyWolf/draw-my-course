@@ -22,6 +22,10 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { FeatureSectionComponent } from '../components/feature-section/feature-section.component';
+import { StaggeredSectionComponent } from 'src/components/staggered-section/staggered-section.component';
+import { FooterComponent } from 'src/components/footer/footer.component';
+import { CartComponent } from 'src/pages/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +36,10 @@ import { MatSelectModule } from '@angular/material/select';
     HeroComponent,
     ProductGalleryComponent,
     AdminComponent,
+    FeatureSectionComponent,
+    StaggeredSectionComponent,
+    FooterComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,

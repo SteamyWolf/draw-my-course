@@ -1,0 +1,12 @@
+<div class="staggered-section-container">
+  <div
+    class="individual-pair-container"
+    *ngFor="let staggered of staggereds; let i = index"
+  >
+    <div class="text-container" [ngClass]="{ 'order-reverse': !(i % 2) }">
+      <h2>{{ staggered.header }}</h2>
+      <p>{{ staggered.text }}</p>
+    </div>
+    <img class="staggered-image" [src]="staggered.src" />
+  </div>
+</div>

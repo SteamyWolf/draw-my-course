@@ -1,0 +1,13 @@
+<section class="main-container">
+  <div class="feature-section-container">
+    <div class="feature" *ngFor="let feature of features">
+      <div class="icon-header-container">
+        <mat-icon class="icon-display">{{ feature.icon }}</mat-icon>
+        <h2 class="feature-header">{{ feature.header }}</h2>
+      </div>
+      <p>
+        {{ feature.text }}
+      </p>
+    </div>
+  </div>
+</section>

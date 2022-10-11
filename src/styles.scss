@@ -5,6 +5,8 @@
 // BASELINE
 * {
   font-family: "Cabin", sans-serif !important;
+  padding: 0;
+  margin: 0;
 }
 html,
 body {
@@ -42,6 +44,15 @@ mat-icon {
   font-feature-settings: "liga" !important;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
 // BREAKPOINTS
 $viewport-x-small: (
   max-width: 480px,
@@ -63,7 +74,6 @@ $viewport-wide-screen: (
 @mixin main-container {
   position: relative;
   margin: 0 auto;
-  width: 100%;
   padding-left: 16px;
   padding-right: 16px;
   @media (max-width: 767px) {
@@ -84,6 +94,13 @@ $viewport-wide-screen: (
 @mixin header {
   margin: 0;
   font-size: 25px;
+}
+
+@mixin flex-centering {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 // COLORS

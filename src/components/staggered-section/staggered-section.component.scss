@@ -1,0 +1,33 @@
+@import "../../styles.scss";
+
+.staggered-section-container {
+  @include main-container;
+  display: grid;
+  gap: 60px;
+  padding-top: 30px;
+  @media (min-width: $viewport-medium-up) {
+    padding-top: 40px;
+  }
+}
+
+.individual-pair-container {
+  display: grid;
+  @media (min-width: $viewport-medium-up) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+.text-container {
+  @include flex-centering;
+}
+
+.order-reverse {
+  @media (min-width: $viewport-medium-up) {
+    order: 2;
+  }
+}
+
+.staggered-image {
+  width: 100%;
+}

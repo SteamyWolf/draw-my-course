@@ -1,41 +1,17 @@
 @import "../../styles.scss";
 
-// .reason-to-buy-container {
-//   @include main-container;
-//   height: 300px;
-// }
+.gradient-container {
+  background: rgb(98, 159, 37);
+  background: linear-gradient(
+    0deg,
+    rgba(98, 159, 37, 1) 0%,
+    rgba(255, 255, 255, 1) 91%
+  );
+  height: 300px;
+  width: 100%;
+  @include flex-centering;
+}
 
-// .two-products-container {
-//   //   @include main-container;
-//   background: rgb(50, 150, 61);
-//   background: radial-gradient(
-//     circle,
-//     rgba(50, 150, 61, 1) 0%,
-//     rgba(0, 0, 0, 1) 100%
-//   );
-// }
-
-// .header-container {
-//   text-align: center;
-//   padding-top: 50px;
-//   padding-bottom: 40px;
-//   color: white;
-// }
-
-// .header {
-//   @include header;
-// }
-
-// .product-section {
-//   @media (min-width: $viewport-medium-up) {
-//     display: flex;
-//     justify-content: space-evenly;
-//   }
-// }
-
-// .card {
-//   margin-bottom: 30px;
-//   @media (min-width: $viewport-medium-up) {
-//     margin: 0px 30px;
-//   }
-// }
+.content-container {
+  @include flex-centering;
+}
