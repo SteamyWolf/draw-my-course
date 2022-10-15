@@ -1,0 +1,6 @@
+@import "../../styles.scss";
+
+.cart-container {
+  @include main-container;
+  padding: 30px 0;
+}

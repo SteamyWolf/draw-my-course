@@ -2,6 +2,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap");
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
 
+// COLORS
+$white: #fff;
+$golf-green: rgb(98, 159, 37);
+
 // BASELINE
 * {
   font-family: "Cabin", sans-serif !important;
@@ -103,5 +107,12 @@ $viewport-wide-screen: (
   justify-content: center;
 }
 
-// COLORS
-$white: #fff;
+@mixin gradient-text {
+  background: -webkit-linear-gradient(
+    90deg,
+    rgba(98, 159, 37, 1) 0%,
+    rgba(0, 0, 0, 1) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

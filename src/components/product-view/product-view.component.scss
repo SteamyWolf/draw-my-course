@@ -1,0 +1,29 @@
+@import "../../styles.scss";
+
+.product-view-container {
+  @include main-container;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product-image {
+  width: 50%;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.details-section {
+  padding-top: 30px;
+}
+
+.paragraphs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}

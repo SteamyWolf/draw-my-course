@@ -26,6 +26,8 @@ import { FeatureSectionComponent } from '../components/feature-section/feature-s
 import { StaggeredSectionComponent } from 'src/components/staggered-section/staggered-section.component';
 import { FooterComponent } from 'src/components/footer/footer.component';
 import { CartComponent } from 'src/pages/cart/cart.component';
+import { ProductHeroComponent } from 'src/components/product-hero/product-hero.component';
+import { ProductViewComponent } from 'src/components/product-view/product-view.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { CartComponent } from 'src/pages/cart/cart.component';
     StaggeredSectionComponent,
     FooterComponent,
     CartComponent,
+    ProductHeroComponent,
+    ProductViewComponent,
   ],
   imports: [
     BrowserModule,

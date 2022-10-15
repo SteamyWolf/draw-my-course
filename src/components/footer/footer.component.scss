@@ -1,15 +1,18 @@
 @import "../../styles.scss";
 
 .footer-container {
-  @include main-container;
   color: white;
   background-color: black;
   padding-top: 30px;
   padding-bottom: 30px;
 }
 
+.content-container {
+  @include main-container;
+}
+
 .address-header {
-  color: rgb(98, 159, 37);
+  color: $golf-green;
   font-weight: 700;
 }
 
@@ -18,7 +21,7 @@
 }
 
 .email-link {
-  color: rgb(98, 159, 37);
+  color: $golf-green;
   text-decoration: none;
   &:hover {
     color: darkgreen;

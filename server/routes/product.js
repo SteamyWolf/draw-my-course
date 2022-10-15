@@ -29,6 +29,18 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    res.status(200).json(product);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "There was an issue with retrieving the product by its id",
+    });
+  }
+});
+
 router.put("/:id", async (req, res) => {
   try {
     const updatedProduct = await Product.findByIdAndUpdate(

@@ -34,4 +34,5 @@
 .feature-header {
   margin: 0;
   padding-left: 16px;
+  @include gradient-text;
 }
