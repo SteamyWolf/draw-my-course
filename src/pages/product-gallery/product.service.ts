@@ -10,6 +10,10 @@ export class ProductService {
     return this.http.get<Product[]>('http://localhost:4000/api/product');
   }
 
+  getOneProduct(id: string) {
+    return this.http.get<Product>(`http://localhost:4000/api/product/${id}`);
+  }
+
   postNewProduct(product: Product) {
     return this.http.post<Product>(
       'http://localhost:4000/api/product',

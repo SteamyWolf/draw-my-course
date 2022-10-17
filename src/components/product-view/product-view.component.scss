@@ -4,19 +4,23 @@
   @include main-container;
   padding-top: 30px;
   padding-bottom: 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+}
+
+.product-hero-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.product-header {
+  font-size: 30px;
 }
 
 .product-image {
-  width: 50%;
+  width: 100%;
 }
 
 .text-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding-left: 20px;
 }
 
 .details-section {
@@ -26,4 +30,9 @@
 .paragraphs {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+}
+
+.cta {
+  background-color: $golf-green;
+  color: $white;
 }

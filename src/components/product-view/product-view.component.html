@@ -1,10 +1,21 @@
 <div class="product-view-container">
-  <img [src]="product?.image" class="product-image" />
-  <div class="text-container">
-    <h2>{{ product?.title }}</h2>
-    <h3>{{ product?.type }}</h3>
-    <p>{{ product?.description }}</p>
+  <div class="product-hero-container">
+    <img [src]="product?.image" class="product-image" />
+    <div class="text-container">
+      <h1 class="product-header">{{ product?.title }}</h1>
+      <h3>{{ product?.type }}</h3>
+      <p>{{ product?.description }}</p>
+      <button
+        mat-raised-button
+        class="cta"
+        (click)="addToCart()"
+        [disabled]="alreadyAddedToCart()"
+      >
+        {{ alreadyAddedToCart() ? "Added to Cart" : "Add to Cart" }}
+      </button>
+    </div>
   </div>
+
   <section class="details-section">
     <header>
       <h2>Details</h2>

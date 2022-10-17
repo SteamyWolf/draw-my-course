@@ -28,6 +28,7 @@
             : products[1].image
         "
         class="product-image order-change"
+        (click)="products ? navigateToProductPage(products[1]) : null"
       />
       <div class="text">
         <h1>Header for the second product</h1>

@@ -18,8 +18,30 @@ export class ProductViewComponent implements OnInit {
   ngOnInit(): void {
     this.cartService
       .getProductById(this.route.snapshot.paramMap.get('id'))
-      ?.subscribe((product: Product) => {
-        this.product = product;
-      });
+      ?.subscribe(
+        (product: Product) => {
+          this.product = product;
+        },
+        (err) => {
+          console.error(err);
+        }
+      );
+  }
+
+  addToCart() {
+    this.cartService.addItemToCartLocalStorage(this.product?._id);
+  }
+
+  alreadyAddedToCart() {
+    if (!window.localStorage.getItem('cart')) return false;
+    const localCart = window.localStorage.getItem('cart');
+    if (localCart) {
+      const parsed: string[] = JSON.parse(localCart);
+      if (!this.product?._id) return false;
+      if (parsed.includes(this.product?._id)) {
+        return true;
+      }
+    }
+    return false;
   }
 }
