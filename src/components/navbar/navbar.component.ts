@@ -13,6 +13,10 @@ export class NavbarComponent {
     const localCart = window.localStorage.getItem('cart');
     if (!localCart) return '';
     const parsed: string[] = JSON.parse(localCart);
-    return parsed.length;
+    if (parsed.length) {
+      return parsed.length;
+    } else {
+      return '';
+    }
   }
 }

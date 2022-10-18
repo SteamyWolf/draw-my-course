@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { CartService } from 'src/pages/cart/cart.service';
 import { Product } from 'src/pages/product-gallery/product.model';
@@ -10,6 +11,7 @@ import { Product } from 'src/pages/product-gallery/product.model';
 })
 export class ProductViewComponent implements OnInit {
   product?: Product;
+  form!: FormGroup;
   constructor(
     private cartService: CartService,
     private route: ActivatedRoute
@@ -26,10 +28,12 @@ export class ProductViewComponent implements OnInit {
           console.error(err);
         }
       );
-  }
 
-  addToCart() {
-    this.cartService.addItemToCartLocalStorage(this.product?._id);
+    this.form = new FormGroup({
+      name: new FormControl('', [Validators.required]),
+      course: new FormControl('', [Validators.required]),
+      hole: new FormControl(''),
+    });
   }
 
   alreadyAddedToCart() {
@@ -43,5 +47,10 @@ export class ProductViewComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  submitFormAndAddToCart(form: FormGroup) {
+    this.cartService.addItemToCartLocalStorage(this.product?._id);
+    console.log(form.controls);
   }
 }

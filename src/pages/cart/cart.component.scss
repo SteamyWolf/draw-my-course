@@ -6,4 +6,27 @@
 }
 
 .cart-list-section {
+  display: grid;
+  gap: 30px;
+}
+
+.cart-item {
+  height: 150px;
+  // border: 1px solid green;
+  display: flex;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 20px;
+}
+
+.product-image {
+  height: 100%;
+}
+
+.customer-information {
+  padding-left: 40px;
 }

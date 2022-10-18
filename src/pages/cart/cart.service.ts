@@ -2,10 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Product } from '../product-gallery/product.model';
 import { ProductService } from '../product-gallery/product.service';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
+  updatedLocalStorage: Subject<number> = new Subject<number>();
   constructor(
     private http: HttpClient,
     private productService: ProductService
@@ -29,7 +30,7 @@ export class CartService {
     }
   }
 
-  getAllCartProductsFromServer() {
+  async getAllCartProductsFromServer() {
     if (!window.localStorage.getItem('cart')) return;
     const localCart = window.localStorage.getItem('cart');
     if (!localCart) return;
@@ -37,6 +38,16 @@ export class CartService {
     const products = parsed.map(async (productId) => {
       return await firstValueFrom(this.productService.getOneProduct(productId));
     });
-    return products;
+    let resolved = await Promise.all(products).then((products) => products);
+    return resolved;
+  }
+
+  removeFromCart(productId: string | undefined) {
+    const localCart = window.localStorage.getItem('cart');
+    if (!localCart) return;
+    const parsed: string[] = JSON.parse(localCart);
+    const filtered = parsed.filter((id) => id !== productId);
+    window.localStorage.setItem('cart', JSON.stringify(filtered));
+    this.updatedLocalStorage.next(Math.random());
   }
 }

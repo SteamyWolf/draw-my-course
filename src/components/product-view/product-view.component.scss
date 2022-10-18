@@ -30,9 +30,23 @@
 .paragraphs {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
 }
 
 .cta {
   background-color: $golf-green;
   color: $white;
+  width: 130px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+}
+
+.disclaimer {
+  padding-top: 10px;
+  font-size: 12px;
+  color: crimson;
 }

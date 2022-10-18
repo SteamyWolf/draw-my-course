@@ -5,14 +5,61 @@
       <h1 class="product-header">{{ product?.title }}</h1>
       <h3>{{ product?.type }}</h3>
       <p>{{ product?.description }}</p>
-      <button
-        mat-raised-button
-        class="cta"
-        (click)="addToCart()"
-        [disabled]="alreadyAddedToCart()"
+      <form
+        class="form"
+        (ngSubmit)="submitFormAndAddToCart(form)"
+        [formGroup]="form"
       >
-        {{ alreadyAddedToCart() ? "Added to Cart" : "Add to Cart" }}
-      </button>
+        <mat-form-field>
+          <mat-label>Main text to appear on picture</mat-label>
+          <input
+            matInput
+            appearance="outline"
+            formControlName="name"
+            placeholder="John Smith or Bethpage Black Course"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Course Location</mat-label>
+          <input
+            matInput
+            appearance="outline"
+            formControlName="course"
+            placeholder="Augusta National Golf Club, Augusta, Georgia, USA"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Hole</mat-label>
+          <input
+            matInput
+            appearance="outline"
+            formControlName="name"
+            placeholder="If wanted, the specific hole number to illustrate or emphasize in the photo"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Notes for the Author</mat-label>
+          <textarea
+            matInput
+            appearance="outline"
+            rows="3"
+            formControlName="name"
+            placeholder="Add anything specific that you would like added to your illustration here"
+          >
+          </textarea>
+        </mat-form-field>
+        <button
+          mat-raised-button
+          type="submit"
+          class="cta"
+          [disabled]="alreadyAddedToCart() || form.invalid"
+        >
+          {{ alreadyAddedToCart() ? "Added to Cart" : "Add to Cart" }}
+        </button>
+        <p class="disclaimer">
+          <i>Form fields with an * are required</i>
+        </p>
+      </form>
     </div>
   </div>
 
