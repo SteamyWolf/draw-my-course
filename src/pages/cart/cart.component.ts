@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../product-gallery/product.model';
 import { CartService } from './cart.service';
+import { CustomerInformation } from '../../components/product-view/product-view.component';
+export interface CartProduct {
+  product: Product;
+  customerInformation: CustomerInformation;
+}
 
 @Component({
   selector: 'cart-component',
@@ -8,14 +13,14 @@ import { CartService } from './cart.service';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
-  cartItems: Product[] | undefined;
+  cartItems: CartProduct[] | undefined;
   constructor(private cartService: CartService) {}
 
-  async ngOnInit(): Promise<void> {
-    this.cartItems = await this.cartService.getAllCartProductsFromServer();
+  ngOnInit(): void {
+    this.cartItems = this.cartService.getAllCartProductsFromServer();
     console.log(this.cartItems);
-    this.cartService.updatedLocalStorage.subscribe(async (random) => {
-      this.cartItems = await this.cartService.getAllCartProductsFromServer();
+    this.cartService.updatedLocalStorage.subscribe((random) => {
+      this.cartItems = this.cartService.getAllCartProductsFromServer();
     });
   }
 

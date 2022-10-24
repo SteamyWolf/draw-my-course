@@ -14,6 +14,17 @@
   height: 150px;
   // border: 1px solid green;
   display: flex;
+  justify-content: space-between;
+  // align-items: center;
+}
+
+.left {
+  display: flex;
+}
+
+.right {
+  display: flex;
+  align-items: center;
 }
 
 .text {
@@ -29,4 +40,7 @@
 
 .customer-information {
   padding-left: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

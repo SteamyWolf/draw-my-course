@@ -5,18 +5,31 @@
 
   <section class="cart-list-section">
     <div class="cart-item" *ngFor="let item of cartItems">
-      <img class="product-image" [src]="item.image" />
-      <div class="text">
-        <h1>{{ item.title }}</h1>
-        <p>{{ item.description }}</p>
+      <div class="left">
+        <img class="product-image" [src]="item.product.image" />
+        <div class="text">
+          <h1>{{ item.product.title }}</h1>
+          <p>{{ item.product.description }}</p>
+        </div>
+        <div class="customer-information">
+          <h2>Your information:</h2>
+          <p>Name: {{ item.customerInformation.name }}</p>
+          <p>Golf Course: {{ item.customerInformation.course }}</p>
+          <p>Hole: {{ item.customerInformation.hole }}</p>
+          <p>Notes: {{ item.customerInformation.notes }}</p>
+        </div>
       </div>
-      <div class="customer-information">
-        <h2>Your information:</h2>
-        <p>Golf Course: (Location)</p>
-        <p>Hole: (Optional)</p>
-        <p>Name: Bobby</p>
+
+      <div class="right">
+        <button
+          mat-raised-button
+          color="warn"
+          (click)="removeFromCart(item.product._id)"
+          class="delete-button"
+        >
+          X
+        </button>
       </div>
-      <button (click)="removeFromCart(item._id)">X</button>
     </div>
   </section>
 </div>

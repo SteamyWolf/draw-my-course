@@ -1,52 +1,46 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Product } from '../product-gallery/product.model';
 import { ProductService } from '../product-gallery/product.service';
-import { firstValueFrom, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
+import { CartProduct } from './cart.component';
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
   updatedLocalStorage: Subject<number> = new Subject<number>();
-  constructor(
-    private http: HttpClient,
-    private productService: ProductService
-  ) {}
+  constructor(private productService: ProductService) {}
 
   getProductById(id: string | null) {
     if (!id) return;
     return this.productService.getOneProduct(id);
   }
 
-  addItemToCartLocalStorage(productId: string | undefined) {
-    if (!productId) return;
+  addItemToCartLocalStorage(cartProduct: CartProduct) {
+    if (!cartProduct) return;
     if (window.localStorage.getItem('cart')) {
       const localCart = window.localStorage.getItem('cart');
       if (!localCart) return;
-      const parsed: string[] = JSON.parse(localCart);
-      parsed.push(productId);
+      const parsed: CartProduct[] = JSON.parse(localCart);
+      parsed.push(cartProduct);
       window.localStorage.setItem('cart', JSON.stringify(parsed));
     } else {
-      window.localStorage.setItem('cart', JSON.stringify([productId]));
+      window.localStorage.setItem('cart', JSON.stringify([cartProduct]));
     }
   }
 
-  async getAllCartProductsFromServer() {
+  getAllCartProductsFromServer() {
     if (!window.localStorage.getItem('cart')) return;
     const localCart = window.localStorage.getItem('cart');
     if (!localCart) return;
-    const parsed: string[] = JSON.parse(localCart);
-    const products = parsed.map(async (productId) => {
-      return await firstValueFrom(this.productService.getOneProduct(productId));
-    });
-    let resolved = await Promise.all(products).then((products) => products);
-    return resolved;
+    const parsed: CartProduct[] = JSON.parse(localCart);
+    return parsed;
   }
 
   removeFromCart(productId: string | undefined) {
     const localCart = window.localStorage.getItem('cart');
     if (!localCart) return;
-    const parsed: string[] = JSON.parse(localCart);
-    const filtered = parsed.filter((id) => id !== productId);
+    const parsed: CartProduct[] = JSON.parse(localCart);
+    const filtered = parsed.filter(
+      (cartProduct) => cartProduct.product._id !== productId
+    );
     window.localStorage.setItem('cart', JSON.stringify(filtered));
     this.updatedLocalStorage.next(Math.random());
   }

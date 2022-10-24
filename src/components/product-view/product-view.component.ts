@@ -1,8 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { CartProduct } from 'src/pages/cart/cart.component';
 import { CartService } from 'src/pages/cart/cart.service';
 import { Product } from 'src/pages/product-gallery/product.model';
+
+export interface CustomerInformation {
+  name: string;
+  course: string;
+  hole: string;
+  notes: string;
+}
 
 @Component({
   selector: 'product-view-component',
@@ -33,6 +41,7 @@ export class ProductViewComponent implements OnInit {
       name: new FormControl('', [Validators.required]),
       course: new FormControl('', [Validators.required]),
       hole: new FormControl(''),
+      notes: new FormControl(''),
     });
   }
 
@@ -40,9 +49,13 @@ export class ProductViewComponent implements OnInit {
     if (!window.localStorage.getItem('cart')) return false;
     const localCart = window.localStorage.getItem('cart');
     if (localCart) {
-      const parsed: string[] = JSON.parse(localCart);
+      const parsed: CartProduct[] = JSON.parse(localCart);
       if (!this.product?._id) return false;
-      if (parsed.includes(this.product?._id)) {
+      if (
+        parsed.find(
+          (cartProduct) => cartProduct.product._id === this.product?._id
+        )
+      ) {
         return true;
       }
     }
@@ -50,7 +63,20 @@ export class ProductViewComponent implements OnInit {
   }
 
   submitFormAndAddToCart(form: FormGroup) {
-    this.cartService.addItemToCartLocalStorage(this.product?._id);
-    console.log(form.controls);
+    let customerInformation: CustomerInformation = {
+      name: form.controls['name'].value,
+      course: form.controls['course'].value,
+      hole: form.controls['hole'].value,
+      notes: form.controls['notes'].value,
+    };
+
+    let cartProduct: CartProduct;
+    if (this.product?._id) {
+      cartProduct = {
+        customerInformation,
+        product: this.product,
+      };
+      this.cartService.addItemToCartLocalStorage(cartProduct);
+    }
   }
 }
