@@ -26,7 +26,7 @@ export class CartService {
     }
   }
 
-  getAllCartProductsFromServer() {
+  getAllCartProductsFromLocalStorage() {
     if (!window.localStorage.getItem('cart')) return;
     const localCart = window.localStorage.getItem('cart');
     if (!localCart) return;

@@ -17,10 +17,10 @@ export class CartComponent implements OnInit {
   constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
-    this.cartItems = this.cartService.getAllCartProductsFromServer();
+    this.cartItems = this.cartService.getAllCartProductsFromLocalStorage();
     console.log(this.cartItems);
     this.cartService.updatedLocalStorage.subscribe((random) => {
-      this.cartItems = this.cartService.getAllCartProductsFromServer();
+      this.cartItems = this.cartService.getAllCartProductsFromLocalStorage();
     });
   }
 

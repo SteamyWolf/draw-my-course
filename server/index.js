@@ -5,6 +5,7 @@ const cors = require("cors");
 const cartRoute = require("./routes/cart");
 const productRoute = require("./routes/product");
 const orderRoute = require("./routes/order");
+const stripeRoute = require("./routes/stripe");
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(express.json());
 app.use("/api/cart", cartRoute);
 app.use("/api/product", productRoute);
 app.use("/api/order", orderRoute);
+app.use("/api/stripe", stripeRoute);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
