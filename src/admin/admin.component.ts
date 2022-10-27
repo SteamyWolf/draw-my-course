@@ -24,6 +24,7 @@ export class AdminComponent implements OnInit {
   deleteProductForm!: FormGroup;
   deletedProduct!: Product;
   deleteButtonLoading: boolean = false;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -40,6 +41,7 @@ export class AdminComponent implements OnInit {
       description: new FormControl(''),
       image: new FormControl(''),
       type: new FormControl('', [Validators.required]),
+      price: new FormControl(0, [Validators.required]),
     });
 
     this.updateProductForm = new FormGroup({
@@ -48,6 +50,7 @@ export class AdminComponent implements OnInit {
       description_update: new FormControl(''),
       image_update: new FormControl(''),
       type_update: new FormControl('', [Validators.required]),
+      price_update: new FormControl(0, [Validators.required]),
     });
 
     this.deleteProductForm = new FormGroup({
@@ -74,6 +77,7 @@ export class AdminComponent implements OnInit {
         description: this.postProductForm.controls['description'].value,
         image: this.postProductForm.controls['image'].value,
         type: this.postProductForm.controls['type'].value,
+        price: this.postProductForm.controls['price'].value,
       })
       .subscribe(
         (product: Product) => {
@@ -96,6 +100,7 @@ export class AdminComponent implements OnInit {
           this.updateProductForm.controls['description_update'].value,
         image: this.updateProductForm.controls['image_update'].value,
         type: this.updateProductForm.controls['type_update'].value,
+        price: this.updateProductForm.controls['price'].value,
       })
       .subscribe(
         (updatedProduct) => {

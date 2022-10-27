@@ -6,23 +6,12 @@ const stripe = require("stripe")(
 router.post("/payment", async (req, res) => {
   try {
     const session = await stripe.checkout.sessions.create({
-      line_items: [
-        {
-          price_data: {
-            currency: "usd",
-            product_data: {
-              name: req.body.name,
-            },
-            unit_amount: req.body.amount,
-          },
-          quantity: req.body.quantity,
-        },
-      ],
+      line_items: req.body.product_data_array,
       mode: "payment",
       success_url: "http://localhost:62298/success",
       cancel_url: "http://localhost:62298",
     });
-    res.redirect(303, session.url);
+    res.status(200).json(session);
   } catch (error) {
     res.status(500).json({
       message: "There was an issue creating your checkout session",

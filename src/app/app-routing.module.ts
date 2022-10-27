@@ -6,6 +6,7 @@ import { AboutComponent } from 'src/pages/about/about.component';
 import { CartComponent } from 'src/pages/cart/cart.component';
 import { HomePageComponent } from 'src/pages/homepage/homepage.component';
 import { ProductGalleryComponent } from 'src/pages/product-gallery/product-gallery.component';
+import { SuccessComponent } from 'src/pages/success/success.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: 'product/:id',
     component: ProductViewComponent,
+  },
+  {
+    path: 'success',
+    component: SuccessComponent,
   },
   {
     path: '',

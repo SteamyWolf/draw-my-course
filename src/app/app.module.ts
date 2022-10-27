@@ -28,6 +28,8 @@ import { FooterComponent } from 'src/components/footer/footer.component';
 import { CartComponent } from 'src/pages/cart/cart.component';
 import { ProductHeroComponent } from 'src/components/product-hero/product-hero.component';
 import { ProductViewComponent } from 'src/components/product-view/product-view.component';
+import { SuccessComponent } from 'src/pages/success/success.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,7 @@ import { ProductViewComponent } from 'src/components/product-view/product-view.c
     CartComponent,
     ProductHeroComponent,
     ProductViewComponent,
+    SuccessComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +63,7 @@ import { ProductViewComponent } from 'src/components/product-view/product-view.c
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

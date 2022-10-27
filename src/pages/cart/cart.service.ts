@@ -44,4 +44,8 @@ export class CartService {
     window.localStorage.setItem('cart', JSON.stringify(filtered));
     this.updatedLocalStorage.next(Math.random());
   }
+
+  removeAllFromCart() {
+    window.localStorage.clear();
+  }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { CartProduct } from 'src/pages/cart/cart.component';
 import { CartService } from 'src/pages/cart/cart.service';
@@ -22,7 +23,8 @@ export class ProductViewComponent implements OnInit {
   form!: FormGroup;
   constructor(
     private cartService: CartService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -78,5 +80,13 @@ export class ProductViewComponent implements OnInit {
       };
       this.cartService.addItemToCartLocalStorage(cartProduct);
     }
+    this.openSnackBar();
+  }
+
+  openSnackBar() {
+    this._snackBar.open('Added to Cart', 'Dismiss', {
+      duration: 5000,
+      verticalPosition: 'top',
+    });
   }
 }

@@ -3,8 +3,11 @@
     <img [src]="product?.image" class="product-image" />
     <div class="text-container">
       <h1 class="product-header">{{ product?.title }}</h1>
-      <h3>{{ product?.type }}</h3>
+      <h3>Type: {{ product?.type }}</h3>
       <p>{{ product?.description }}</p>
+      <h2>
+        <strong>${{ product?.price }}.00</strong>
+      </h2>
       <form
         class="form"
         (ngSubmit)="submitFormAndAddToCart(form)"

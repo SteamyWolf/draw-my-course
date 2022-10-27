@@ -4,4 +4,5 @@ export interface Product {
   description?: string;
   image?: string;
   type: 'digital' | 'physical';
+  price: number;
 }

@@ -53,6 +53,10 @@
                 <mat-option value="physical">Physical</mat-option>
               </mat-select>
             </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Price</mat-label>
+              <input type="number" formControlName="price" />
+            </mat-form-field>
             <button
               type="submit"
               [disabled]="postProductForm.invalid"
@@ -110,6 +114,10 @@
                 <mat-option value="digital">Digital</mat-option>
                 <mat-option value="physical">Physical</mat-option>
               </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Price</mat-label>
+              <input type="number" formControlName="price_update" />
             </mat-form-field>
             <button
               type="submit"

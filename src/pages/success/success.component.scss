@@ -1,0 +1,10 @@
+@import "../../styles.scss";
+
+.success-container {
+  @include main-container;
+  text-align: center;
+}
+
+h1 {
+  color: $golf-green;
+}
