@@ -78,6 +78,7 @@ export class AdminComponent implements OnInit {
         image: this.postProductForm.controls['image'].value,
         type: this.postProductForm.controls['type'].value,
         price: this.postProductForm.controls['price'].value,
+        quantity: 1,
       })
       .subscribe(
         (product: Product) => {
@@ -101,6 +102,7 @@ export class AdminComponent implements OnInit {
         image: this.updateProductForm.controls['image_update'].value,
         type: this.updateProductForm.controls['type_update'].value,
         price: this.updateProductForm.controls['price'].value,
+        quantity: 1,
       })
       .subscribe(
         (updatedProduct) => {

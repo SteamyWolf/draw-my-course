@@ -58,7 +58,7 @@ export class CartComponent implements OnInit {
             },
             unit_amount: parseInt(`${cartItem.product.price}00`),
           },
-          quantity: 1,
+          quantity: cartItem.product.quantity,
         };
         return productData;
       });
@@ -83,8 +83,20 @@ export class CartComponent implements OnInit {
   recalculateTotal() {
     let total: number = 0;
     this.cartItems?.forEach((item) => {
-      total = total + item.product.price;
+      total = total + (item.product.price * item.product.quantity); //prettier-ignore
     });
     this.total = total;
+  }
+
+  quantityChange(event: any, cartItem: CartProduct) {
+    const index = this.cartItems!.findIndex(
+      (item) => item.product._id === cartItem.product._id
+    );
+    let foundItem = this.cartItems!.find(
+      (item) => item.product._id === cartItem.product._id
+    );
+    foundItem!.product.quantity = event.target.valueAsNumber;
+    this.cartItems?.splice(index, 1, foundItem!);
+    this.recalculateTotal();
   }
 }

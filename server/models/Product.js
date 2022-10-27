@@ -6,6 +6,8 @@ const ProductSchema = mongoose.Schema(
     description: { type: String },
     image: { type: String },
     type: { type: String, enum: ["digital", "physical"], required: true },
+    price: { type: Number },
+    quantity: { type: Number },
   },
   { timeStamps: true }
 );
