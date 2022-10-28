@@ -48,6 +48,10 @@ mat-icon {
   font-feature-settings: "liga" !important;
 }
 
+button[mat-raised-button] {
+  width: 115px;
+}
+
 p,
 h1,
 h2,

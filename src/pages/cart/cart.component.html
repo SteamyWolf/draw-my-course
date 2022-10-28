@@ -4,6 +4,23 @@
   </header>
 
   <section class="cart-list-section">
+    <div class="empty-cart-container" *ngIf="!cartItems?.length">
+      <div class="empty-cart-image-container">
+        <img
+          class="empty-cart-image"
+          src="../../assets/images/golfer-sand.jpg"
+        />
+      </div>
+      <h2>Cart is empty!</h2>
+      <p>Try visiting the products page and adding some products</p>
+      <button
+        class="empty-cart-button"
+        mat-raised-button
+        [routerLink]="'/products'"
+      >
+        Products
+      </button>
+    </div>
     <div class="cart-item" *ngFor="let item of cartItems">
       <div class="left">
         <img class="product-image" [src]="item.product.image" />
@@ -50,6 +67,7 @@
     <div class="checkout-container">
       <button
         mat-raised-button
+        color="primary"
         class="checkout-button"
         (click)="checkout()"
         [disabled]="!cartItems?.length"

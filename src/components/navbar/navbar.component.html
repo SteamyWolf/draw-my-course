@@ -8,6 +8,24 @@
     />
   </div>
   <div class="navbar-links-container">
+    <div class="nav-links">
+      <button
+        mat-flat-button
+        class="products-nav-link"
+        [routerLink]="'/products'"
+        [routerLinkActive]="'active'"
+      >
+        Products
+      </button>
+      <button
+        mat-flat-button
+        class="products-nav-link"
+        [routerLink]="'/about'"
+        [routerLinkActive]="'active'"
+      >
+        About
+      </button>
+    </div>
     <div class="shopping-icon-container">
       <mat-icon
         class="mat-icon"

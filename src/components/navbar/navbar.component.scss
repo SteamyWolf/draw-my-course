@@ -14,12 +14,32 @@
 
 .navbar-logo-container {
   cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 .shopping-icon-container {
   cursor: pointer;
+  height: 24px;
 }
 
 .mat-icon {
   font-size: 26px;
+}
+
+.products-nav-link {
+}
+
+.navbar-links-container {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links {
+  padding-right: 15px;
+}
+
+.active {
+  color: $white;
+  background-color: darkgreen;
 }

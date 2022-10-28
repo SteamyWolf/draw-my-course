@@ -8,7 +8,6 @@
             : products[0].image
         "
         class="product-image"
-        (click)="products ? navigateToProductPage(products[0]) : null"
       />
       <div class="text">
         <h1>The Original Framed Masterpiece</h1>
@@ -17,6 +16,13 @@
           it doesn't have to be a hole in one. Save the memories of your epic
           day
         </p>
+        <button
+          mat-raised-button
+          (click)="products ? navigateToProductPage(products[0]) : null"
+          class="view-product-button"
+        >
+          View Product
+        </button>
         <span class="blob1"></span>
       </div>
     </div>
@@ -28,11 +34,17 @@
             : products[1].image
         "
         class="product-image order-change"
-        (click)="products ? navigateToProductPage(products[1]) : null"
       />
       <div class="text">
         <h1>Header for the second product</h1>
         <p>This is a sample description</p>
+        <button
+          mat-raised-button
+          (click)="products ? navigateToProductPage(products[1]) : null"
+          class="view-product-button"
+        >
+          View Product
+        </button>
         <span class="blob2"></span>
       </div>
     </div>

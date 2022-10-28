@@ -59,12 +59,12 @@
 }
 
 .checkout-container {
-  text-align: center;
+  text-align: right;
 }
 
 .checkout-button {
-  background-color: $golf-green;
-  color: $white;
+  // background-color: $golf-green;
+  // color: $white;
 }
 
 .quantity-form-field {
@@ -77,4 +77,26 @@
       width: 66px;
     }
   }
+}
+
+.empty-cart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.empty-cart-image-container {
+  width: 500px;
+}
+
+.empty-cart-image {
+  width: 100%;
+  height: 100%;
+}
+
+.empty-cart-button {
+  background-color: darkgreen;
+  color: $white;
+  margin-top: 20px;
+  width: 100px;
 }
