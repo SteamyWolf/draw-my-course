@@ -6,6 +6,7 @@ const cartRoute = require("./routes/cart");
 const productRoute = require("./routes/product");
 const orderRoute = require("./routes/order");
 const stripeRoute = require("./routes/stripe");
+const nodemailerRoute = require("./routes/nodemailer");
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use("/api/cart", cartRoute);
 app.use("/api/product", productRoute);
 app.use("/api/order", orderRoute);
 app.use("/api/stripe", stripeRoute);
+app.use("/api/mail", nodemailerRoute);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

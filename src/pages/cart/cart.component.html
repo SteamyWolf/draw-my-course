@@ -33,6 +33,7 @@
           <input
             matInput
             type="number"
+            min="1"
             [defaultValue]="1"
             (change)="quantityChange($event, item)"
           />
@@ -70,7 +71,7 @@
         color="primary"
         class="checkout-button"
         (click)="checkout()"
-        [disabled]="!cartItems?.length"
+        [disabled]="!cartItems?.length || this.total <= 0"
       >
         Checkout
       </button>

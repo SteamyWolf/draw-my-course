@@ -2,11 +2,15 @@ import { Injectable } from '@angular/core';
 import { ProductService } from '../product-gallery/product.service';
 import { Subject } from 'rxjs';
 import { CartProduct } from './cart.component';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
   updatedLocalStorage: Subject<number> = new Subject<number>();
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private http: HttpClient
+  ) {}
 
   getProductById(id: string | null) {
     if (!id) return;
@@ -47,5 +51,19 @@ export class CartService {
 
   removeAllFromCart() {
     window.localStorage.clear();
+  }
+
+  getCustomerInformationAfterSuccessfulTransaction(session_id: string) {
+    return this.http.post(
+      `http://localhost:4000/api/stripe/payment/success?session_id=${session_id}`,
+      {}
+    );
+  }
+
+  sendEmailToZach() {
+    return this.http.post(
+      'http://localhost:4000/api/mail/nodemailer/successful-payment',
+      {}
+    );
   }
 }
