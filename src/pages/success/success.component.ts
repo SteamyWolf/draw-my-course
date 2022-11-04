@@ -16,6 +16,8 @@ export class SuccessComponent implements OnInit {
 
   ngOnInit() {
     if (!window.localStorage.getItem('refresh_check')) {
+      const customer_bought_items =
+        this.cartService.getAllCartProductsFromLocalStorage();
       this.cartService.removeAllFromCart();
 
       this.route.queryParams.subscribe((queries) => {
@@ -34,6 +36,7 @@ export class SuccessComponent implements OnInit {
                   customer_name: session.customer_details.name,
                   customer_email: session.customer_details.email,
                   customer_address: session.customer_details.address,
+                  customer_bought_items,
                 };
                 this.cartService
                   .sendRequestEmail(email_details)
