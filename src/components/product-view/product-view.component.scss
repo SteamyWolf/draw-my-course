@@ -8,7 +8,9 @@
 
 .product-hero-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  @media (min-width: $viewport-medium-up) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .product-header {
@@ -20,7 +22,13 @@
 }
 
 .text-container {
-  padding-left: 20px;
+  padding-top: 20px;
+  text-align: center;
+  @media (min-width: $viewport-medium-up) {
+    text-align: inherit;
+    padding-top: 0;
+    padding-left: 20px;
+  }
 }
 
 .details-section {
@@ -29,7 +37,9 @@
 
 .paragraphs {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  @media (min-width: $viewport-medium-up) {
+    grid-template-columns: repeat(2, 1fr);
+  }
   gap: 20px;
 }
 

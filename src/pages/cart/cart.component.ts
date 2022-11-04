@@ -10,7 +10,7 @@ export interface CartProduct {
   customerInformation: CustomerInformation;
 }
 
-interface ProductStripeData {
+export interface ProductStripeData {
   price_data: {
     currency: string;
     product_data: {
@@ -63,10 +63,8 @@ export class CartComponent implements OnInit {
         return productData;
       });
 
-    this.http
-      .post('http://localhost:4000/api/stripe/payment', {
-        product_data_array: productDataArray,
-      })
+    this.cartService
+      .checkoutToStripe(productDataArray)
       .subscribe((response: any) => {
         console.log(response);
         this.redirectToStripeCheckout(response);

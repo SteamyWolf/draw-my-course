@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ProductService } from '../product-gallery/product.service';
 import { Subject } from 'rxjs';
-import { CartProduct } from './cart.component';
+import { CartProduct, ProductStripeData } from './cart.component';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
@@ -53,6 +53,12 @@ export class CartService {
     window.localStorage.clear();
   }
 
+  checkoutToStripe(productDataArray: ProductStripeData[] | undefined) {
+    return this.http.post('http://localhost:4000/api/stripe/payment', {
+      product_data_array: productDataArray,
+    });
+  }
+
   getCustomerInformationAfterSuccessfulTransaction(session_id: string) {
     return this.http.post(
       `http://localhost:4000/api/stripe/payment/success?session_id=${session_id}`,
@@ -60,10 +66,10 @@ export class CartService {
     );
   }
 
-  sendEmailToZach() {
+  sendRequestEmail(emailDetails: any) {
     return this.http.post(
       'http://localhost:4000/api/mail/nodemailer/successful-payment',
-      {}
+      emailDetails
     );
   }
 }

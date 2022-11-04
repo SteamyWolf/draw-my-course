@@ -16,15 +16,18 @@
     display: grid;
     grid-template-columns: 50% 50%;
     gap: 20px;
-    height: 400px;
+    height: 800px;
     align-items: center;
   }
 }
 
 .product-image {
-  height: 400px;
+  height: 500px;
   width: 100%;
   object-fit: cover;
+  @media (min-width: $viewport-medium-up) {
+    height: 800px;
+  }
 }
 
 .order-change {

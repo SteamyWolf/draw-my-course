@@ -15,22 +15,35 @@ export class SuccessComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.cartService.removeAllFromCart();
+    if (!window.localStorage.getItem('refresh_check')) {
+      this.cartService.removeAllFromCart();
 
-    this.route.queryParams.subscribe((queries) => {
-      if (queries['session_id']) {
-        this.cartService
-          .getCustomerInformationAfterSuccessfulTransaction(
-            queries['session_id']
-          )
-          .subscribe((customer) => {
-            console.log(customer);
-          });
-      }
-    });
-
-    this.cartService.sendEmailToZach().subscribe((response) => {
-      console.log(response);
-    });
+      this.route.queryParams.subscribe((queries) => {
+        if (queries['session_id']) {
+          this.cartService
+            .getCustomerInformationAfterSuccessfulTransaction(
+              queries['session_id']
+            )
+            .subscribe((session: any) => {
+              if (
+                session.payment_status === 'paid' &&
+                session.status === 'complete'
+              ) {
+                const email_details = {
+                  status: session.status,
+                  customer_name: session.customer_details.name,
+                  customer_email: session.customer_details.email,
+                  customer_address: session.customer_details.address,
+                };
+                this.cartService
+                  .sendRequestEmail(email_details)
+                  .subscribe((response) => {
+                    window.localStorage.setItem('refresh_check', 'true');
+                  });
+              }
+            });
+        }
+      });
+    }
   }
 }

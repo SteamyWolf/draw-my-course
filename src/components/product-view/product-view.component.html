@@ -3,10 +3,10 @@
     <img [src]="product?.image" class="product-image" />
     <div class="text-container">
       <h1 class="product-header">{{ product?.title }}</h1>
-      <h3>Type: {{ product?.type }}</h3>
+      <h3>Type: {{ product?.type | titlecase }}</h3>
       <p>{{ product?.description }}</p>
       <h2>
-        <strong>${{ product?.price }}.00</strong>
+        <strong>{{ product?.price | currency }}</strong>
       </h2>
       <form
         class="form"
@@ -14,12 +14,21 @@
         [formGroup]="form"
       >
         <mat-form-field>
-          <mat-label>Main text to appear on picture</mat-label>
+          <mat-label>Name</mat-label>
           <input
             matInput
             appearance="outline"
             formControlName="name"
-            placeholder="John Smith or Bethpage Black Course"
+            placeholder="John Smith"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Main text to appear on picture</mat-label>
+          <input
+            matInput
+            appearance="outline"
+            formControlName="main"
+            placeholder="Hole-In-One or Par"
           />
         </mat-form-field>
         <mat-form-field>
@@ -51,14 +60,17 @@
           >
           </textarea>
         </mat-form-field>
-        <button
-          mat-raised-button
-          type="submit"
-          class="cta"
-          [disabled]="alreadyAddedToCart() || form.invalid"
-        >
-          {{ alreadyAddedToCart() ? "Added to Cart" : "Add to Cart" }}
-        </button>
+        <div>
+          <button
+            mat-raised-button
+            type="submit"
+            class="cta"
+            [disabled]="alreadyAddedToCart() || form.invalid"
+          >
+            {{ alreadyAddedToCart() ? "Added to Cart" : "Add to Cart" }}
+          </button>
+        </div>
+
         <p class="disclaimer">
           <i>Form fields with an * are required</i>
         </p>

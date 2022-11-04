@@ -8,6 +8,7 @@ import { Product } from 'src/pages/product-gallery/product.model';
 
 export interface CustomerInformation {
   name: string;
+  main: string;
   course: string;
   hole: string;
   notes: string;
@@ -41,6 +42,7 @@ export class ProductViewComponent implements OnInit {
 
     this.form = new FormGroup({
       name: new FormControl('', [Validators.required]),
+      main: new FormControl('', [Validators.required]),
       course: new FormControl('', [Validators.required]),
       hole: new FormControl(''),
       notes: new FormControl(''),
@@ -67,6 +69,7 @@ export class ProductViewComponent implements OnInit {
   submitFormAndAddToCart(form: FormGroup) {
     let customerInformation: CustomerInformation = {
       name: form.controls['name'].value,
+      main: form.controls['main'].value,
       course: form.controls['course'].value,
       hole: form.controls['hole'].value,
       notes: form.controls['notes'].value,

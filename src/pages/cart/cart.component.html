@@ -49,7 +49,7 @@
 
       <div class="right">
         <h2 class="price-header">
-          <strong>${{ item.product.price }}.00</strong>
+          <strong>{{ item.product.price | currency }}</strong>
         </h2>
         <button
           mat-raised-button
@@ -63,7 +63,7 @@
     </div>
     <h1 class="total">
       Total:
-      <strong> ${{ total }}.00</strong>
+      <strong> {{ total | currency }}</strong>
     </h1>
     <div class="checkout-container">
       <button

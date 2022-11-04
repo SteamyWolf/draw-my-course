@@ -4,7 +4,6 @@ const stripe = require("stripe")(
 );
 
 router.post("/payment", async (req, res) => {
-  console.log(req.body);
   try {
     const session = await stripe.checkout.sessions.create({
       billing_address_collection: "required",
@@ -29,7 +28,7 @@ router.post("/payment/success", async (req, res) => {
     const session = await stripe.checkout.sessions.retrieve(
       req.query.session_id
     );
-    res.status(200).json(session.customer_details);
+    res.status(200).json(session);
   } catch (error) {
     res.status(500).json({
       message: "There was an issue with getting the customer information",
