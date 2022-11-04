@@ -54,21 +54,24 @@ export class CartService {
   }
 
   checkoutToStripe(productDataArray: ProductStripeData[] | undefined) {
-    return this.http.post('http://localhost:4000/api/stripe/payment', {
-      product_data_array: productDataArray,
-    });
+    return this.http.post(
+      'https://draw-my-course.herokuapp.com/api/stripe/payment',
+      {
+        product_data_array: productDataArray,
+      }
+    );
   }
 
   getCustomerInformationAfterSuccessfulTransaction(session_id: string) {
     return this.http.post(
-      `http://localhost:4000/api/stripe/payment/success?session_id=${session_id}`,
+      `https://draw-my-course.herokuapp.com/api/stripe/payment/success?session_id=${session_id}`,
       {}
     );
   }
 
   sendRequestEmail(emailDetails: any) {
     return this.http.post(
-      'http://localhost:4000/api/mail/nodemailer/successful-payment',
+      'https://draw-my-course.herokuapp.com/api/mail/nodemailer/successful-payment',
       emailDetails
     );
   }
