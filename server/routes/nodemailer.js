@@ -16,7 +16,7 @@ router.post("/nodemailer/successful-payment", async (req, res) => {
     to: "wyatthunterallan@gmail.com",
     subject: `New order placed from DrawMyCourse. Name: ${req.body.customer_name}`,
     html: `
-      <p>A new order has been made. See the customer details to know who to send it to and how to contact them. You will need to log into stripe to see what the customer actually ordered. Use the information below to help.</p>
+      <p>A new order has been made. See the customer details to know who to send it to and how to contact them. Use the information below to help.</p>
       <h2>Customer Information</h2>
       <ul>
         <li>Name: ${req.body.customer_name}</li>
@@ -39,6 +39,30 @@ router.post("/nodemailer/successful-payment", async (req, res) => {
           </address>
         </li>
       </ul>
+      <br/>
+      <h2>Ordered Items</h2>
+      <ul>
+        ${req.body.customer_bought_items.map((item) => {
+          return `<li>
+              <h4>Title: ${item.product.title}</h4>
+              <p>Quantity: ${item.product.quantity}</p>
+              <p>Name: ${item.customerInformation.name}</p>
+              <p>Main Text: ${item.customerInformation.main}</p>
+              <p>Course: ${item.customerInformation.course}</p>
+              <p>Hole: ${
+                item.customerInformation.hole
+                  ? item.customerInformation.hole
+                  : ""
+              }</p>
+              <p>Additional Notes: ${
+                item.customerInformation.notes
+                  ? item.customerInformation.notes
+                  : ""
+              }</p>
+            </li>`;
+        })}
+      </ul>
+      
     `,
   };
 
