@@ -1,4 +1,7 @@
-<section class="footer-container">
+<section
+  class="footer-container"
+  [class.special-footer]="router.url === '/cart' || router.url === '/about'"
+>
   <div class="content-container">
     <address>
       <h1 class="address-header">Utah</h1>

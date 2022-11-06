@@ -8,6 +8,11 @@
   width: 100%;
 }
 
+.special-footer {
+  position: absolute;
+  bottom: 0;
+}
+
 .content-container {
   @include main-container;
 }
