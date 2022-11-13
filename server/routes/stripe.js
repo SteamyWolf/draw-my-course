@@ -1,17 +1,30 @@
 const router = require("express").Router();
-const stripe = require("stripe")(
-  "sk_test_51LmUMqCA2mhT4AVStV8hMsuNDXq8WzbSpuZksD3Jd2tiVQNYNsHFhj01hHTx5MMz1QHl24z2mAbdBxWQ8rCVArdX00VxzxuCOY"
+const stripe = require("stripe");
+stripe(
+  process.env.NODE_ENV
+    ? process.env.STRIPE_PRODUCTION_KEY
+    : process.env.STRIPE_KEY
 );
 
 router.post("/payment", async (req, res) => {
+  let successURL;
+  let cancelURL;
+  if (process.env.NODE_ENV) {
+    successURL =
+      "https://www.drawmycourse.com/success?session_id={CHECKOUT_SESSION_ID}";
+    cancelURL = "https://www.drawmycourse.com";
+  } else {
+    successURL =
+      "http://localhost:56211/success?session_id={CHECKOUT_SESSION_ID}";
+    cancelURL = "http://localhost:56211";
+  }
   try {
     const session = await stripe.checkout.sessions.create({
       billing_address_collection: "required",
       line_items: req.body.product_data_array,
       mode: "payment",
-      success_url:
-        "http://localhost:56211/success?session_id={CHECKOUT_SESSION_ID}",
-      cancel_url: "http://localhost:56211",
+      success_url: successURL,
+      cancel_url: cancelURL,
     });
     res.status(200).json(session);
   } catch (error) {
@@ -23,7 +36,6 @@ router.post("/payment", async (req, res) => {
 });
 
 router.post("/payment/success", async (req, res) => {
-  console.log(req.query.session_id);
   try {
     const session = await stripe.checkout.sessions.retrieve(
       req.query.session_id

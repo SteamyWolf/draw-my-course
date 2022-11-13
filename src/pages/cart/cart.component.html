@@ -21,7 +21,12 @@
         Products
       </button>
     </div>
-    <div class="cart-item" *ngFor="let item of cartItems">
+    <div
+      class="cart-item"
+      *ngFor="let item of cartItems"
+      (mouseenter)="onHover()"
+      (mouseleave)="onHover()"
+    >
       <div class="left">
         <img class="product-image" [src]="item.product.image" />
         <div class="text">
@@ -51,30 +56,43 @@
         <h2 class="price-header">
           <strong>{{ item.product.price | currency }}</strong>
         </h2>
-        <button
-          mat-raised-button
-          color="warn"
-          (click)="removeFromCart(item.product._id)"
-          class="delete-button"
-        >
-          <mat-icon class="delete-icon" fontIcon="close"></mat-icon>
-        </button>
+        <div class="edit-delete-container">
+          <button
+            *ngIf="hoverState"
+            mat-raised-button
+            color="primary"
+            (click)="editCartItem(item.product._id)"
+            class="edit-button"
+          >
+            <mat-icon class="edit-icon" fontIcon="edit"></mat-icon>
+          </button>
+          <button
+            mat-raised-button
+            color="warn"
+            (click)="removeFromCart(item.product._id)"
+            class="delete-button"
+          >
+            <mat-icon class="delete-icon" fontIcon="close"></mat-icon>
+          </button>
+        </div>
       </div>
     </div>
-    <h1 class="total">
-      Total:
-      <strong> {{ total | currency }}</strong>
-    </h1>
-    <div class="checkout-container">
-      <button
-        mat-raised-button
-        color="primary"
-        class="checkout-button"
-        (click)="checkout()"
-        [disabled]="!cartItems?.length || this.total <= 0"
-      >
-        Checkout
-      </button>
+    <div class="total-checkout">
+      <h1 class="total">
+        Total:
+        <strong> {{ total | currency }}</strong>
+      </h1>
+      <div class="checkout-container">
+        <button
+          mat-raised-button
+          color="primary"
+          class="checkout-button"
+          (click)="checkout()"
+          [disabled]="!cartItems?.length || this.total <= 0"
+        >
+          Checkout
+        </button>
+      </div>
     </div>
   </section>
 </div>

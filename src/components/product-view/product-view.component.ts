@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, UrlSegment } from '@angular/router';
 import { CartProduct } from 'src/pages/cart/cart.component';
 import { CartService } from 'src/pages/cart/cart.service';
 import { Product } from 'src/pages/product-gallery/product.model';
@@ -22,6 +22,7 @@ export interface CustomerInformation {
 export class ProductViewComponent implements OnInit {
   product?: Product;
   form!: FormGroup;
+  editMode: boolean = false;
   constructor(
     private cartService: CartService,
     private route: ActivatedRoute,
@@ -29,6 +30,35 @@ export class ProductViewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe((params: any) => {
+      this.editMode = params.edit;
+      if (params.edit) {
+        this.route.url.subscribe((url: any) => {
+          const productId = url[1].path;
+          const cart = this.cartService.getAllCartProductsFromLocalStorage();
+          const currentCartItem = cart?.filter(
+            (item) => item.product._id === productId
+          )[0];
+          this.form = new FormGroup({
+            name: new FormControl(currentCartItem?.customerInformation.name),
+            main: new FormControl(currentCartItem?.customerInformation.main),
+            course: new FormControl(
+              currentCartItem?.customerInformation.course
+            ),
+            hole: new FormControl(currentCartItem?.customerInformation.hole),
+            notes: new FormControl(currentCartItem?.customerInformation.notes),
+          });
+        });
+      } else {
+        this.form = new FormGroup({
+          name: new FormControl('', [Validators.required]),
+          main: new FormControl('', [Validators.required]),
+          course: new FormControl('', [Validators.required]),
+          hole: new FormControl(''),
+          notes: new FormControl(''),
+        });
+      }
+    });
     this.cartService
       .getProductById(this.route.snapshot.paramMap.get('id'))
       ?.subscribe(
@@ -39,14 +69,6 @@ export class ProductViewComponent implements OnInit {
           console.error(err);
         }
       );
-
-    this.form = new FormGroup({
-      name: new FormControl('', [Validators.required]),
-      main: new FormControl('', [Validators.required]),
-      course: new FormControl('', [Validators.required]),
-      hole: new FormControl(''),
-      notes: new FormControl(''),
-    });
   }
 
   alreadyAddedToCart() {
@@ -81,13 +103,21 @@ export class ProductViewComponent implements OnInit {
         customerInformation,
         product: this.product,
       };
-      this.cartService.addItemToCartLocalStorage(cartProduct);
+
+      let message;
+      if (this.editMode) {
+        message = 'Cart Item Edited';
+        this.cartService.editExistingCartItemInLocalStorage(cartProduct);
+      } else {
+        message = 'Added to Cart';
+        this.cartService.addItemToCartLocalStorage(cartProduct);
+      }
+      this.openSnackBar(message);
     }
-    this.openSnackBar();
   }
 
-  openSnackBar() {
-    this._snackBar.open('Added to Cart', 'Dismiss', {
+  openSnackBar(message: string) {
+    this._snackBar.open(message, 'Dismiss', {
       duration: 5000,
       verticalPosition: 'top',
     });

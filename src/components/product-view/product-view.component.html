@@ -62,12 +62,22 @@
         </mat-form-field>
         <div>
           <button
+            *ngIf="!editMode"
             mat-raised-button
             type="submit"
             class="cta"
             [disabled]="alreadyAddedToCart() || form.invalid"
           >
             {{ alreadyAddedToCart() ? "Added to Cart" : "Add to Cart" }}
+          </button>
+          <button
+            *ngIf="editMode"
+            mat-raised-button
+            type="submit"
+            class="cta"
+            [disabled]="form.invalid"
+          >
+            Edit Cart Item
           </button>
         </div>
 

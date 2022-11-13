@@ -5,6 +5,7 @@ import { CustomerInformation } from '../../components/product-view/product-view.
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { loadStripe } from '@stripe/stripe-js';
+import { Router } from '@angular/router';
 export interface CartProduct {
   product: Product;
   customerInformation: CustomerInformation;
@@ -28,9 +29,14 @@ export interface ProductStripeData {
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
+  hoverState: boolean = false;
   cartItems: CartProduct[] | undefined;
   total: number = 0;
-  constructor(private cartService: CartService, private http: HttpClient) {}
+  constructor(
+    private cartService: CartService,
+    private http: HttpClient,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.cartItems = this.cartService.getAllCartProductsFromLocalStorage();
@@ -96,5 +102,13 @@ export class CartComponent implements OnInit {
     foundItem!.product.quantity = event.target.valueAsNumber;
     this.cartItems?.splice(index, 1, foundItem!);
     this.recalculateTotal();
+  }
+
+  editCartItem(id: string | undefined) {
+    this.router.navigate(['product', id], { queryParams: { edit: true } });
+  }
+
+  onHover() {
+    this.hoverState = !this.hoverState;
   }
 }

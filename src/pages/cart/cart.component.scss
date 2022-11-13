@@ -2,48 +2,70 @@
 
 .cart-container {
   @include main-container;
-  padding: 30px 0;
+  @media (min-width: $viewport-medium-up) {
+    padding: 30px 0;
+  }
 }
 
 .cart-list-section {
-  display: grid;
-  gap: 30px;
-  padding-top: 25px;
+  @media (min-width: $viewport-medium-up) {
+    display: grid;
+    gap: 30px;
+    padding-top: 25px;
+  }
 }
 
 .cart-item {
-  height: 150px;
-  // border: 1px solid green;
-  display: flex;
-  justify-content: space-between;
-  // align-items: center;
+  @media (min-width: $viewport-medium-up) {
+    height: 150px;
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 .left {
-  display: flex;
+  @media (min-width: $viewport-medium-up) {
+    display: flex;
+  }
 }
 
 .right {
-  display: flex;
-  align-items: center;
+  text-align: center;
+  padding: 20px 0;
+  @media (min-width: $viewport-medium-up) {
+    display: flex;
+    align-items: center;
+    text-align: unset;
+    padding: 0;
+  }
 }
 
 .text {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-left: 20px;
+  @media (min-width: $viewport-medium-up) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 20px;
+  }
 }
 
 .product-image {
+  width: 100%;
   height: 100%;
+  @media (min-width: $viewport-medium-up) {
+    width: inherit;
+  }
 }
 
 .customer-information {
-  padding-left: 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  text-align: center;
+  @media (min-width: $viewport-medium-up) {
+    padding-left: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: unset;
+  }
 }
 
 .delete-icon {
@@ -51,15 +73,31 @@
 }
 
 .price-header {
-  padding-right: 30px;
+  @media (min-width: $viewport-medium-up) {
+    padding-right: 30px;
+  }
+}
+
+.total-checkout {
+  padding-bottom: 20px;
+  @media (min-width: $viewport-medium-up) {
+    padding: 0;
+  }
 }
 
 .total {
-  text-align: right;
+  text-align: center;
+  @media (min-width: $viewport-medium-up) {
+    text-align: right;
+  }
 }
 
 .checkout-container {
-  text-align: right;
+  text-align: center;
+  @media (min-width: $viewport-medium-up) {
+    text-align: right;
+    padding-top: 20px;
+  }
 }
 
 .checkout-button {
@@ -68,15 +106,32 @@
 }
 
 .quantity-form-field {
-  display: flex;
-  align-items: center;
-  padding: 0 20px;
+  width: 100%;
   ::ng-deep {
     .mat-form-field-wrapper {
-      padding-bottom: 0;
-      width: 66px;
+      padding-top: 18px;
     }
   }
+  @media (min-width: $viewport-medium-up) {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    width: inherit;
+    ::ng-deep {
+      .mat-form-field-wrapper {
+        padding-top: 0;
+        padding-bottom: 0;
+        width: 66px;
+      }
+    }
+  }
+}
+
+.edit-delete-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-evenly;
 }
 
 .empty-cart-container {

@@ -75,4 +75,16 @@ export class CartService {
       emailDetails
     );
   }
+
+  editExistingCartItemInLocalStorage(cartProduct: CartProduct) {
+    const cart = this.getAllCartProductsFromLocalStorage();
+    const index = cart!.findIndex(
+      (item) => item.product._id === cartProduct.product._id
+    );
+    let editedCart = cart!.splice(index, 1)[0];
+    editedCart = cartProduct;
+    cart!.push(editedCart);
+    this.removeAllFromCart();
+    window.localStorage.setItem('cart', JSON.stringify(cart));
+  }
 }
