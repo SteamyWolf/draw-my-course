@@ -1,6 +1,7 @@
+const dotenv = require("dotenv");
+dotenv.config();
 const express = require("express");
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
 const cors = require("cors");
 const compression = require("compression");
 const cartRoute = require("./routes/cart");
@@ -11,7 +12,6 @@ const nodemailerRoute = require("./routes/nodemailer");
 
 const app = express();
 
-dotenv.config();
 const PORT = process.env.PORT || 4000;
 
 app.use(compression());

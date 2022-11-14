@@ -1,6 +1,5 @@
 const router = require("express").Router();
-const stripe = require("stripe");
-stripe(
+const stripe = require("stripe")(
   process.env.NODE_ENV
     ? process.env.STRIPE_PRODUCTION_KEY
     : process.env.STRIPE_KEY

@@ -3,10 +3,12 @@ import { ProductService } from '../product-gallery/product.service';
 import { Subject } from 'rxjs';
 import { CartProduct, ProductStripeData } from './cart.component';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
   updatedLocalStorage: Subject<number> = new Subject<number>();
+  url: string = environment.SERVER_URL;
   constructor(
     private productService: ProductService,
     private http: HttpClient
@@ -54,24 +56,21 @@ export class CartService {
   }
 
   checkoutToStripe(productDataArray: ProductStripeData[] | undefined) {
-    return this.http.post(
-      'https://draw-my-course.herokuapp.com/api/stripe/payment',
-      {
-        product_data_array: productDataArray,
-      }
-    );
+    return this.http.post(`${this.url}/api/stripe/payment`, {
+      product_data_array: productDataArray,
+    });
   }
 
   getCustomerInformationAfterSuccessfulTransaction(session_id: string) {
     return this.http.post(
-      `https://draw-my-course.herokuapp.com/api/stripe/payment/success?session_id=${session_id}`,
+      `${this.url}/api/stripe/payment/success?session_id=${session_id}`,
       {}
     );
   }
 
   sendRequestEmail(emailDetails: any) {
     return this.http.post(
-      'https://draw-my-course.herokuapp.com/api/mail/nodemailer/successful-payment',
+      `${this.url}/api/mail/nodemailer/successful-payment`,
       emailDetails
     );
   }
